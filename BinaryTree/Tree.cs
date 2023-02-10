@@ -12,13 +12,11 @@ namespace BinaryTree
     internal class Tree<T> : IEnumerable<T> where T : IComparable
     {
         private Node<T> root { get; set; }
-        private bool isReversedReading;
-        private List<T> ts = new List<T>();
-
+        private bool _isReversedReading;
 
         public Tree(bool isReversedReading)
         {
-            this.isReversedReading = isReversedReading;
+            this._isReversedReading = isReversedReading;
         }
 
         public void Add(T item)
@@ -35,32 +33,34 @@ namespace BinaryTree
 
         public IEnumerator<T> GetEnumerator()
         {
-            return this.CreateList(root).GetEnumerator();
+            List<T> listOfItems = new List<T>();
+            return this.CreateList(root, listOfItems).GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return this.CreateList(root).GetEnumerator();
+            List<T> listOfItems = new List<T>();
+            return this.CreateList(root, listOfItems).GetEnumerator();
         }
 
-        private List<T> CreateList(Node<T> item)
+        private List<T> CreateList(Node<T> item, List<T> listOfItems)
         {
             if (item != null)
             {
-                if (isReversedReading)
+                if (_isReversedReading)
                 {
-                    CreateList(item.RightNode);
-                    this.ts.Add(item.Value);
-                    CreateList(item.LeftNode);
+                    CreateList(item.RightNode, listOfItems);
+                    listOfItems.Add(item.Value);
+                    CreateList(item.LeftNode, listOfItems);
                 }
                 else
                 {
-                    CreateList(item.LeftNode);
-                    this.ts.Add(item.Value);
-                    CreateList(item.RightNode);
+                    CreateList(item.LeftNode, listOfItems);
+                    listOfItems.Add(item.Value);
+                    CreateList(item.RightNode, listOfItems);
                 }
             }
-            return this.ts;
+            return listOfItems;
         }
     }
 }

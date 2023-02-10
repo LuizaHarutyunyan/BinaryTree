@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace BinaryTree
 {
     internal class Node<T> where T : IComparable
     {
-        public Node<T> LeftNode { get; set; }
-        public Node<T> RightNode { get; set; }
-        public T Value { get; set; }
+        public Node<T> LeftNode { get; private set; }
+        public Node<T> RightNode { get; private set; }
+        public T Value { get; private set; }
 
         public Node()
         {

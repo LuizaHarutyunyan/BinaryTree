@@ -8,11 +8,9 @@ tree.Add(4000);
 tree.Add(-2022);
 tree.Add(0);
 
+
 IEnumerator<int> enumerator = tree.GetEnumerator();
-while (enumerator.MoveNext())
-{
-    Console.WriteLine(enumerator.Current);
-}
+
 
 foreach (var item in tree)
 {
